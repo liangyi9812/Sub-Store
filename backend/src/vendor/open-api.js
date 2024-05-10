@@ -212,11 +212,11 @@ export class OpenAPI {
                     .get({ url })
                     .then((resp) => {
                         console.log(
-                            `[Push Service] URL: ${url}\nRES: ${resp.statusCode} ${resp.body}`,
+                            `[${this.formatDateTime(new Date())}] [Push Service] URL: ${url}\nRES: ${resp.statusCode} ${resp.body}`,
                         );
                     })
                     .catch((e) => {
-                        console.log(`[Push Service] URL: ${url}\nERROR: ${e}`);
+                        console.log(`[${this.formatDateTime(new Date())}] [Push Service] URL: ${url}\nERROR: ${e}`);
                     });
             }
         }
@@ -224,15 +224,24 @@ export class OpenAPI {
 
     // other helper functions
     log(msg) {
-        if (this.debug) console.log(`[${this.name}] LOG: ${msg}`);
+        if (this.debug)
+            console.log(
+                `[${this.formatDateTime(new Date())}] [${
+                    this.name
+                }] LOG: ${msg}`,
+            );
     }
 
     info(msg) {
-        console.log(`[${this.name}] INFO: ${msg}`);
+        console.log(
+            `[${this.formatDateTime(new Date())}] [${this.name}] INFO: ${msg}`,
+        );
     }
 
     error(msg) {
-        console.log(`[${this.name}] ERROR: ${msg}`);
+        console.log(
+            `[${this.formatDateTime(new Date())}] [${this.name}] ERROR: ${msg}`,
+        );
     }
 
     wait(millisec) {
@@ -249,6 +258,31 @@ export class OpenAPI {
                 $context.body = value.body;
             }
         }
+    }
+
+    formatDate(date) {
+        return `${date.getFullYear()}-${this.padZero(
+            date.getMonth() + 1,
+            2,
+        )}-${this.padZero(date.getDate(), 2)}`;
+    }
+
+    formatTime(date) {
+        return `${this.padZero(date.getHours(), 2)}:${this.padZero(
+            date.getMinutes(),
+            2,
+        )}:${this.padZero(date.getSeconds(), 2)}.${this.padZero(
+            date.getMilliseconds(),
+            3,
+        )}`;
+    }
+
+    formatDateTime(date) {
+        return `${this.formatDate(date)} ${this.formatTime(date)}`;
+    }
+
+    padZero(num, places) {
+        return String(num).padStart(places, '0');
     }
 }
 
