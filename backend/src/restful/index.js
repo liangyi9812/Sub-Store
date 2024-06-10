@@ -1,4 +1,5 @@
 import express from '@/vendor/express';
+import dotenv from 'dotenv';
 import $ from '@/core/app';
 import migrate from '@/utils/migration';
 import download from '@/utils/download';
@@ -19,6 +20,7 @@ import registerNodeInfoRoutes from './node-info';
 import registerParserRoutes from './parser';
 
 export default function serve() {
+    dotenv.config();
     let port;
     let host;
     if ($.env.isNode) {
@@ -70,6 +72,7 @@ export default function serve() {
         const fs = eval(`require("fs")`);
         const data_url = eval('process.env.SUB_STORE_DATA_URL');
         const fe_be_path = eval('process.env.SUB_STORE_FRONTEND_BACKEND_PATH');
+        console.log(`SUB_STORE_FRONTEND_BACKEND_PATH => ${fe_be_path}`);
         const fe_port = eval('process.env.SUB_STORE_FRONTEND_PORT') || 3001;
         const fe_host =
             eval('process.env.SUB_STORE_FRONTEND_HOST') || host || '::';

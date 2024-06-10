@@ -470,7 +470,7 @@ async function produceArtifact({
 }
 
 async function syncArtifacts() {
-    $.info('开始同步所有远程配置...');
+    $.info('开始同步所有远程配置...1');
     const allArtifacts = $.read(ARTIFACTS_KEY);
     const files = {};
 
@@ -593,7 +593,7 @@ async function syncArtifacts() {
     }
 }
 async function syncAllArtifacts(_, res) {
-    $.info('开始同步所有远程配置...');
+    $.info('开始同步所有远程配置...2');
     try {
         await syncArtifacts();
         success(res);

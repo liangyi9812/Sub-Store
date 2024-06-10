@@ -226,11 +226,19 @@ export class OpenAPI {
                     .get({ url })
                     .then((resp) => {
                         console.log(
-                            `[${this.formatDateTime(new Date())}] [Push Service] URL: ${url}\nRES: ${resp.statusCode} ${resp.body}`,
+                            `[${this.formatDateTime(
+                                new Date(),
+                            )}] [Push Service] URL: ${url}\nRES: ${
+                                resp.statusCode
+                            } ${resp.body}`,
                         );
                     })
                     .catch((e) => {
-                        console.log(`[${this.formatDateTime(new Date())}] [Push Service] URL: ${url}\nERROR: ${e}`);
+                        console.log(
+                            `[${this.formatDateTime(
+                                new Date(),
+                            )}] [Push Service] URL: ${url}\nERROR: ${e}`,
+                        );
                     });
             }
         }
