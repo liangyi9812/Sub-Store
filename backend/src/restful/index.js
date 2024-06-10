@@ -1,5 +1,4 @@
 import express from '@/vendor/express';
-import dotenv from 'dotenv';
 import $ from '@/core/app';
 import migrate from '@/utils/migration';
 import download from '@/utils/download';
@@ -20,7 +19,6 @@ import registerNodeInfoRoutes from './node-info';
 import registerParserRoutes from './parser';
 
 export default function serve() {
-    dotenv.config();
     let port;
     let host;
     if ($.env.isNode) {
@@ -46,6 +44,7 @@ export default function serve() {
     $app.start();
 
     if ($.env.isNode) {
+        $.info(`[BACKEND] hi, pillarcoin~`)
         const backend_cron = eval('process.env.SUB_STORE_BACKEND_CRON');
         if (backend_cron) {
             $.info(`[CRON] ${backend_cron} enabled`);
